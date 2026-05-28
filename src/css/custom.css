@@ -1,39 +1,480 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
-/* You can override the default Infima variables here. */
-:root {
-  --ifm-color-primary: #256f63;
-  --ifm-color-primary-dark: #216459;
-  --ifm-color-primary-darker: #1f5e54;
-  --ifm-color-primary-darkest: #1a4d45;
-  --ifm-color-primary-light: #297a6d;
-  --ifm-color-primary-lighter: #2b8072;
-  --ifm-color-primary-lightest: #319181;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-}
-
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+:root,
+[data-theme='light'],
 [data-theme='dark'] {
-  --ifm-color-primary: #64c7b8;
-  --ifm-color-primary-dark: #4bbdad;
-  --ifm-color-primary-darker: #3fb8a7;
-  --ifm-color-primary-darkest: #349788;
-  --ifm-color-primary-light: #7dd1c4;
-  --ifm-color-primary-lighter: #89d5ca;
-  --ifm-color-primary-lightest: #aee2da;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --aphelion-bg: #050505;
+  --aphelion-surface: #0f0f11;
+  --aphelion-surface-2: #16161a;
+  --aphelion-amber: #f59e0b;
+  --aphelion-amber-hover: #fcd34d;
+  --aphelion-text: #fafafa;
+  --aphelion-muted: #a1a1aa;
+  --aphelion-faint: #71717a;
+  --aphelion-border: rgba(255, 255, 255, 0.08);
+  --aphelion-border-strong: rgba(255, 255, 255, 0.14);
+
+  --ifm-color-primary: var(--aphelion-amber);
+  --ifm-color-primary-dark: #dd8e0a;
+  --ifm-color-primary-darker: #c67f09;
+  --ifm-color-primary-darkest: #9d6507;
+  --ifm-color-primary-light: var(--aphelion-amber-hover);
+  --ifm-color-primary-lighter: #fde68a;
+  --ifm-color-primary-lightest: #fef3c7;
+  --ifm-background-color: var(--aphelion-bg);
+  --ifm-background-surface-color: var(--aphelion-surface);
+  --ifm-footer-background-color: var(--aphelion-bg);
+  --ifm-navbar-background-color: rgba(5, 5, 5, 0.9);
+  --ifm-navbar-link-color: var(--aphelion-muted);
+  --ifm-navbar-link-hover-color: var(--aphelion-amber-hover);
+  --ifm-menu-color: var(--aphelion-muted);
+  --ifm-menu-color-active: var(--aphelion-amber-hover);
+  --ifm-menu-color-background-active: rgba(245, 158, 11, 0.1);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.06);
+  --ifm-font-color-base: #d4d4d8;
+  --ifm-heading-color: var(--aphelion-text);
+  --ifm-link-color: var(--aphelion-amber-hover);
+  --ifm-link-hover-color: var(--aphelion-amber);
+  --ifm-toc-link-color: var(--aphelion-muted);
+  --ifm-border-color: var(--aphelion-border);
+  --ifm-code-background: rgba(245, 158, 11, 0.1);
+  --ifm-code-color: var(--aphelion-amber-hover);
+  --ifm-code-font-size: 92%;
+  --ifm-font-family-base: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ifm-font-family-monospace: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ifm-heading-font-family: "Cabinet Grotesk", "Bricolage Grotesque", system-ui, sans-serif;
+  --ifm-heading-font-weight: 900;
+  --ifm-global-radius: 0;
+  --ifm-pre-background: #08080a;
+  --ifm-table-border-color: var(--aphelion-border);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.025);
+  --docusaurus-highlighted-code-line-bg: rgba(245, 158, 11, 0.14);
 }
 
-.hero--primary {
-  --ifm-hero-background-color: #193c3a;
-  --ifm-hero-text-color: #ffffff;
+* {
+  letter-spacing: 0;
+}
+
+html,
+body {
+  background: var(--aphelion-bg);
+}
+
+body {
+  color: var(--ifm-font-color-base);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+}
+
+#__docusaurus {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  background: transparent;
+}
+
+::selection {
+  background: var(--aphelion-amber);
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--aphelion-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--aphelion-surface-2);
+  border: 2px solid var(--aphelion-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--aphelion-amber);
+}
+
+.navbar {
+  border-bottom: 1px solid var(--aphelion-border);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.navbar__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.navbar__brand {
+  color: var(--aphelion-text);
+  gap: 0.6rem;
+}
+
+.navbar__logo {
+  height: 1.85rem;
+}
+
+.navbar__logo img {
+  border-radius: 0;
+}
+
+.navbar__title {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.navbar__link,
+.navbar__item {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--aphelion-amber-hover);
+}
+
+.navbar-sidebar,
+.navbar-sidebar__brand {
+  background: var(--aphelion-bg);
+}
+
+.navbar-sidebar__backdrop {
+  background: rgba(0, 0, 0, 0.68);
+}
+
+.main-wrapper {
+  background: transparent;
+}
+
+.theme-doc-sidebar-container {
+  background: rgba(8, 8, 10, 0.88);
+  border-right: 1px solid var(--aphelion-border);
+}
+
+.theme-doc-sidebar-menu {
+  padding: 1rem 0.75rem;
+}
+
+.menu__list-item:not(:first-child) {
+  margin-top: 0.1rem;
+}
+
+.menu__link {
+  border-left: 2px solid transparent;
+  color: var(--aphelion-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  padding: 0.55rem 0.75rem;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.menu__link:hover {
+  color: var(--aphelion-text);
+}
+
+.menu__link--active,
+.menu__link--active:hover {
+  border-left-color: var(--aphelion-amber);
+  color: var(--aphelion-amber-hover);
+}
+
+.breadcrumbs {
+  --ifm-breadcrumb-border-radius: 0;
+  font-size: 0.72rem;
+}
+
+.breadcrumbs__link {
+  color: var(--aphelion-faint);
+}
+
+.breadcrumbs__item--active .breadcrumbs__link,
+.breadcrumbs__link:hover {
+  color: var(--aphelion-amber-hover);
+}
+
+.theme-doc-markdown {
+  color: #d4d4d8;
+  font-size: 0.94rem;
+}
+
+.theme-doc-markdown header h1,
+.theme-doc-markdown h1,
+.theme-doc-markdown h2,
+.theme-doc-markdown h3,
+.theme-doc-markdown h4 {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.theme-doc-markdown header h1,
+.theme-doc-markdown h1 {
+  margin-bottom: 1rem;
+  color: var(--aphelion-text);
+  font-size: 3.25rem;
+  line-height: 0.95;
 }
 
 .theme-doc-markdown h2 {
-  margin-top: 2rem;
+  margin-top: 2.6rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--aphelion-border);
+  color: var(--aphelion-text);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.theme-doc-markdown h3 {
+  color: var(--aphelion-text);
+  font-size: 1.35rem;
+}
+
+.theme-doc-markdown p,
+.theme-doc-markdown li {
+  line-height: 1.78;
+}
+
+.theme-doc-markdown strong {
+  color: var(--aphelion-text);
+}
+
+.theme-doc-markdown a:not(.hash-link) {
+  text-decoration-color: rgba(252, 211, 77, 0.35);
+  text-underline-offset: 0.22em;
+  transition:
+    color 0.16s ease,
+    text-decoration-color 0.16s ease;
+}
+
+.theme-doc-markdown a:not(.hash-link):hover {
+  text-decoration-color: var(--aphelion-amber-hover);
+}
+
+.table-of-contents {
+  border-left: 1px solid var(--aphelion-border);
+  font-size: 0.76rem;
+}
+
+.table-of-contents__link {
+  color: var(--aphelion-muted);
+}
+
+.table-of-contents__link:hover,
+.table-of-contents__link--active {
+  color: var(--aphelion-amber-hover);
+}
+
+code {
+  border: 1px solid rgba(245, 158, 11, 0.18);
+  font-weight: 500;
+}
+
+pre,
+.theme-code-block {
+  border: 1px solid var(--aphelion-border);
+  background: #08080a;
+  box-shadow: none;
+}
+
+.theme-code-block {
+  overflow: hidden;
+}
+
+.theme-code-block div[class*='codeBlockTitle'] {
+  border-bottom: 1px solid var(--aphelion-border);
+  background: #0a0a0c;
+  color: var(--aphelion-muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.prism-code {
+  background: #08080a !important;
+}
+
+.theme-doc-markdown blockquote {
+  border-left: 2px solid var(--aphelion-amber);
+  background: rgba(245, 158, 11, 0.07);
+  color: #e4e4e7;
+}
+
+.theme-doc-markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--aphelion-border);
+  background: rgba(15, 15, 17, 0.7);
+}
+
+.theme-doc-markdown th {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--aphelion-text);
+}
+
+.theme-doc-markdown th,
+.theme-doc-markdown td {
+  border-color: var(--aphelion-border);
+}
+
+.alert {
+  --ifm-alert-border-radius: 0;
+  border: 1px solid var(--aphelion-border-strong);
+  background: rgba(15, 15, 17, 0.82);
+  color: #e4e4e7;
+}
+
+.alert a {
+  color: var(--aphelion-amber-hover);
+}
+
+.pagination-nav {
+  gap: 0.75rem;
+}
+
+.pagination-nav__link {
+  border: 1px solid var(--aphelion-border);
+  border-radius: 0;
+  background: rgba(15, 15, 17, 0.78);
+  transition:
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: rgba(245, 158, 11, 0.44);
+  transform: translateY(-1px);
+}
+
+.pagination-nav__label {
+  color: var(--aphelion-text);
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 900;
+}
+
+.pagination-nav__sublabel {
+  color: var(--aphelion-faint);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.theme-edit-this-page {
+  color: var(--aphelion-muted);
+  font-size: 0.78rem;
+}
+
+.theme-edit-this-page:hover {
+  color: var(--aphelion-amber-hover);
+}
+
+.button {
+  --ifm-button-border-radius: 0;
+  border-width: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.button--secondary {
+  --ifm-button-background-color: var(--aphelion-amber);
+  --ifm-button-border-color: var(--aphelion-amber);
+  --ifm-button-color: #050505;
+  --ifm-button-hover-background-color: var(--aphelion-amber-hover);
+  --ifm-button-hover-border-color: var(--aphelion-amber-hover);
+  --ifm-button-hover-color: #050505;
+}
+
+.button--outline.button--secondary {
+  --ifm-button-background-color: transparent;
+  --ifm-button-border-color: var(--aphelion-border-strong);
+  --ifm-button-color: var(--aphelion-text);
+  --ifm-button-hover-background-color: rgba(255, 255, 255, 0.06);
+  --ifm-button-hover-border-color: rgba(245, 158, 11, 0.44);
+  --ifm-button-hover-color: var(--aphelion-amber-hover);
+}
+
+.hero--primary {
+  --ifm-hero-background-color: transparent;
+  --ifm-hero-text-color: var(--aphelion-text);
+}
+
+.footer {
+  border-top: 1px solid var(--aphelion-border);
+  background: var(--aphelion-bg);
+}
+
+.footer__title {
+  color: var(--aphelion-faint);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.footer__link-item {
+  color: var(--aphelion-muted);
+  font-size: 0.86rem;
+}
+
+.footer__link-item:hover {
+  color: var(--aphelion-amber-hover);
+}
+
+@media (max-width: 996px) {
+  .navbar {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .navbar-sidebar {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .theme-doc-sidebar-container {
+    background: var(--aphelion-bg);
+  }
+
+  .theme-doc-markdown header h1,
+  .theme-doc-markdown h1 {
+    font-size: 2.45rem;
+  }
+
+  .theme-doc-markdown h2 {
+    font-size: 1.65rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar__inner {
+    padding: 0 1rem;
+  }
+
+  .theme-doc-markdown {
+    font-size: 0.88rem;
+  }
+
+  .theme-doc-markdown header h1,
+  .theme-doc-markdown h1 {
+    font-size: 2.1rem;
+  }
 }

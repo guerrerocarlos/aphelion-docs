@@ -18,6 +18,35 @@ const config: Config = {
   projectName: 'aphelion-docs',
 
   onBrokenLinks: 'throw',
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'preconnect',
+        href: 'https://api.fontshare.com',
+        crossorigin: 'anonymous',
+      },
+    },
+  ],
+  stylesheets: [
+    'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap',
+    'https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900&display=swap',
+  ],
 
   i18n: {
     defaultLocale: 'en',
@@ -42,7 +71,9 @@ const config: Config = {
 
   themeConfig: {
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Aphelion Docs',

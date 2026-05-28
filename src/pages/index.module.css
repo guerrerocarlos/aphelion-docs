@@ -1,19 +1,60 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
-
 .heroBanner {
-  padding: 4rem 0 3rem;
-  text-align: left;
   position: relative;
   overflow: hidden;
+  padding: 5.5rem 0 4rem;
+  text-align: left;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroBanner::after {
+  content: "";
+  position: absolute;
+  right: max(2rem, calc((100vw - 1200px) / 2));
+  bottom: 1.5rem;
+  width: min(34rem, 44vw);
+  height: 14rem;
+  border: 1px solid var(--aphelion-border);
+  background:
+    linear-gradient(180deg, rgba(245, 158, 11, 0.12), transparent),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.045) 0,
+      rgba(255, 255, 255, 0.045) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+  opacity: 0.44;
+  pointer-events: none;
+}
+
+.logoMark {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.4rem;
+  image-rendering: auto;
+}
+
+.kicker {
+  margin: 0 0 1rem;
+  color: var(--aphelion-amber-hover);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.heroBanner :global(.hero__title) {
+  max-width: 760px;
+  margin-bottom: 1rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 8rem;
+  font-weight: 900;
+  line-height: 0.82;
+}
+
+.heroBanner :global(.hero__subtitle) {
+  max-width: 720px;
+  color: var(--aphelion-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 .buttons {
@@ -21,8 +62,112 @@
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.commandStrip {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 760px;
+  margin-top: 3rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--aphelion-border);
+  background: rgba(8, 8, 10, 0.78);
+  color: var(--aphelion-muted);
+  font-size: 0.78rem;
+}
+
+.commandStrip span:first-child {
+  color: var(--aphelion-text);
+}
+
+.commandStrip span:nth-child(2) {
+  color: var(--aphelion-amber-hover);
 }
 
 .quickLinks {
-  padding: 3rem 0;
+  padding: 3.5rem 0 4.5rem;
+}
+
+.quickLink {
+  height: 100%;
+  min-height: 14rem;
+  padding: 1.4rem;
+  border: 1px solid var(--aphelion-border);
+  background: rgba(15, 15, 17, 0.78);
+}
+
+.quickLink h2 {
+  margin-bottom: 0.9rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.quickLink p {
+  min-height: 4.9rem;
+  color: var(--aphelion-muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.quickLink a {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-underline-offset: 0.22em;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3.5rem 0 3rem;
+  }
+
+  .heroBanner::after {
+    display: none;
+  }
+
+  .logoMark {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+
+  .heroBanner :global(.hero__title) {
+    font-size: 5.8rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .heroBanner {
+    padding: 2.5rem 0;
+  }
+
+  .heroBanner :global(.hero__title) {
+    font-size: 3.8rem;
+  }
+
+  .buttons {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .buttons a {
+    width: 100%;
+  }
+
+  .quickLinks {
+    padding: 2rem 0 3rem;
+  }
+
+  .quickLink {
+    min-height: auto;
+    margin-bottom: 1rem;
+  }
+
+  .quickLink p {
+    min-height: auto;
+  }
 }

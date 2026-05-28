@@ -1,0 +1,46 @@
+---
+id: intro
+title: Start Here
+slug: /
+---
+
+# Aphelion Documentation
+
+Aphelion is a personal AI harness for a machine you control. It runs as a Linux service, uses Telegram as the operator surface, and routes meaningful actions through explicit consent and typed audit records.
+
+Use these docs when you want to install Aphelion, operate it day to day, or understand the guardrails behind the Telegram bot.
+
+## What Aphelion Gives You
+
+- A Telegram-controlled agent that can work while you are away from the terminal.
+- Approval-first operation for normal turns.
+- Side threads for separate work lanes.
+- Durable memory and execution records.
+- Local service management with `systemd --user`.
+- Configurable providers: OpenAI, Anthropic, OpenRouter, Gemini, and local Ollama.
+- Optional durable child agents and Tailnet remote-child workflows.
+
+## Fast Path
+
+```bash
+APHELION_VERSION=v0.1.5
+curl -fsSL "https://raw.githubusercontent.com/idolum-ai/aphelion/${APHELION_VERSION}/scripts/install-release.sh" | bash -s -- "${APHELION_VERSION}"
+~/.local/bin/aphelion quickstart --detect-admin --install-service
+```
+
+After install, open Telegram and send:
+
+```text
+/health
+/status
+/help
+```
+
+## Recommended Reading Order
+
+1. [Requirements](getting-started/requirements.md)
+2. [Install](getting-started/install.md)
+3. [Quickstart](getting-started/quickstart.md)
+4. [Telegram Operations](operations/telegram.md)
+5. [First Requests](examples/first-requests.md)
+

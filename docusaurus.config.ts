@@ -3,7 +3,7 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Aphelion Docs',
+  title: 'Aphelion',
   tagline: 'Install and operate a governed personal agent from Telegram.',
   favicon: 'img/favicon.ico',
 
@@ -76,7 +76,7 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Aphelion Docs',
+      title: 'Aphelion',
       items: [
         {
           type: 'docSidebar',

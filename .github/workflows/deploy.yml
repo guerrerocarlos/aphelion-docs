@@ -53,7 +53,7 @@ jobs:
   deploy-w7s:
     environment:
       name: w7s
-      url: https://guerrerocarlos.w7s.cloud/aphelion-docs/
+      url: https://${{ github.repository_owner }}.w7s.cloud/${{ github.event.repository.name }}/
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -71,11 +71,11 @@ jobs:
       - name: Build for W7S
         run: npm run build
         env:
-          DOCUSAURUS_URL: https://guerrerocarlos.w7s.cloud
+          DOCUSAURUS_URL: https://${{ github.repository_owner }}.w7s.cloud
+          DOCUSAURUS_BASE_URL: /${{ github.event.repository.name }}/
 
       - name: Deploy to W7S
         uses: w7s-io/w7s-cloud@v1
         with:
           token: ${{ github.token }}
-          working-directory: build
           usage-warnings-issue: false

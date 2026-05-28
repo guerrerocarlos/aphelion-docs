@@ -12,7 +12,7 @@ const config: Config = {
   },
 
   url: process.env.DOCUSAURUS_URL ?? 'https://guerrerocarlos.github.io',
-  baseUrl: '/aphelion-docs/',
+  baseUrl: process.env.DOCUSAURUS_BASE_URL ?? '/aphelion-docs/',
 
   organizationName: 'guerrerocarlos',
   projectName: 'aphelion-docs',

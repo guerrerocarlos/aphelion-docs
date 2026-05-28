@@ -33,6 +33,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          DOCUSAURUS_URL: https://${{ github.repository_owner }}.w7s.cloud
+          DOCUSAURUS_BASE_URL: /${{ github.event.repository.name }}/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -55,27 +58,23 @@ jobs:
       name: w7s
       url: https://${{ github.repository_owner }}.w7s.cloud/${{ github.event.repository.name }}/
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Setup Node
-        uses: actions/setup-node@v6
+      - name: Download GitHub Pages artifact
+        uses: actions/download-artifact@v6
         with:
-          node-version: 22
-          cache: npm
+          name: github-pages
+          path: w7s-artifact
 
-      - name: Install
-        run: npm ci
-
-      - name: Build for W7S
-        run: npm run build
-        env:
-          DOCUSAURUS_URL: https://${{ github.repository_owner }}.w7s.cloud
-          DOCUSAURUS_BASE_URL: /${{ github.event.repository.name }}/
+      - name: Prepare W7S package
+        run: |
+          mkdir -p w7s-package/build
+          tar -xf w7s-artifact/artifact.tar -C w7s-package/build
+          test -f w7s-package/build/index.html
 
       - name: Deploy to W7S
         uses: w7s-io/w7s-cloud@v1
         with:
           token: ${{ github.token }}
+          working-directory: w7s-package
           usage-warnings-issue: false

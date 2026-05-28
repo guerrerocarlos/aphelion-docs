@@ -11,7 +11,7 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://guerrerocarlos.github.io',
+  url: process.env.DOCUSAURUS_URL ?? 'https://guerrerocarlos.github.io',
   baseUrl: '/aphelion-docs/',
 
   organizationName: 'guerrerocarlos',
